@@ -26,6 +26,28 @@ mod my_module {
 
     // TODO: 関数を以下に完成させてください。
     // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(inputs: Vec<(String,Command)>) -> Vec<String> {
+        let mut result = Vec::new();
+
+        for input in inputs{
+            let mut value = input.0;
+            let cmd = input.1;
+            let append_key_word="bar";
+
+            match cmd {
+                Command::Uppercase => result.push(value.to_uppercase()),
+                Command::Append(n) => {
+                    for _ in 0..n {
+                        value += append_key_word;
+                    }
+                    result.push(value);
+                },
+                Command::Trim => result.push(value.trim().to_string()),
+            }
+        }
+
+        result
+    }
 }
 
 fn main() {
@@ -36,6 +58,7 @@ fn main() {
 mod tests {
     // TODO: `transformer`をスコープに入れるために何をすればいいですか？
     // use ???;
+    use super::my_module::transformer;
     use super::Command;
 
     #[test]

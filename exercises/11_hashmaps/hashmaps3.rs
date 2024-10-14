@@ -25,6 +25,21 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
 
         // TODO: スコアテーブルに引数resultsから取得したデータを格納しましょう。
         // チーム1の取得点はチーム2の失点であることに留意しましょう。
+        scores.entry(team_1_name)
+        .and_modify(|v:&mut TeamScores|  {v.goals_scored += team_1_score})
+        .and_modify(|v:&mut TeamScores|  {v.goals_conceded += team_2_score})
+        .or_insert(TeamScores{
+            goals_scored: team_1_score,
+            goals_conceded: team_2_score
+        });
+
+        scores.entry(team_2_name)
+        .and_modify(|v:&mut TeamScores|  {v.goals_scored += team_2_score})
+        .and_modify(|v:&mut TeamScores|  {v.goals_conceded += team_1_score})
+        .or_insert(TeamScores{
+            goals_scored: team_2_score,
+            goals_conceded: team_1_score
+        });
     }
 
     scores

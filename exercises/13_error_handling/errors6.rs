@@ -24,6 +24,9 @@ impl ParsePosNonzeroError {
 
     // TODO: 他のエラー処理を書いてください。
     // fn from_parse_int(???) -> Self { ??? }
+    fn from_parse_int(err: ParseIntError) -> Self {
+        Self::ParseInt(err)
+    }
 }
 
 #[derive(PartialEq, Debug)]
@@ -40,13 +43,22 @@ impl PositiveNonzeroInteger {
 
     fn parse(s: &str) -> Result<Self, ParsePosNonzeroError> {
         // TODO: `parse()`でpanicエラーを返してしまう前に適切なエラーを返すように修正してください。
-        let x: i64 = s.parse().unwrap();
-        Self::new(x).map_err(ParsePosNonzeroError::from_creation)
+        // let x: i64 = s.parse()?;
+        // Self::new(x).map_err(ParsePosNonzeroError::from_creation)
+
+        match s.parse::<i64>(){
+            Ok(..0) => Err(ParsePosNonzeroError::Creation(CreationError::Negative)),
+            Ok(0) => Err(ParsePosNonzeroError::Creation(CreationError::Zero)),
+            Err(err) => Err(ParsePosNonzeroError::from_parse_int(err)),
+            Ok(v) => Ok(Self(v as u64))
+        }
     }
 }
 
 fn main() {
     // この行で関数のテストができます。
+    let one: i64 = "-1".parse().unwrap();
+    println!("{:?}",one)
 }
 
 #[cfg(test)]

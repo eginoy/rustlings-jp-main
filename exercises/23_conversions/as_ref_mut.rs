@@ -4,20 +4,22 @@
 
 // 引数からバイト数を取得しましょう。
 // TODO: トレイト境界として`AsRef`を追加しましょう。
-fn byte_counter<T>(arg: T) -> usize {
+fn byte_counter<T: AsRef<str>>(arg: T) -> usize {
     arg.as_ref().as_bytes().len()
 }
 
 // // 引数から文字数を取得しましょう。
 // TODO: トレイト境界として`AsRef`を追加しましょう。
-fn char_counter<T>(arg: T) -> usize {
+fn char_counter<T: AsRef<str>>(arg: T) -> usize {
     arg.as_ref().chars().count()
 }
 
 // `as_mut()`を使って数値を二乗しましょう。
 // TODO: 適切なトレイト境界を追加しましょう。
-fn num_sq<T>(arg: &mut T) {
+fn num_sq<T: AsMut<u32>>(arg: &mut T) {
     // TODO: 関数の内部を実装しましょう。
+    let arg = arg.as_mut();
+    *arg *= *arg
 }
 
 fn main() {

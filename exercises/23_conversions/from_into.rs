@@ -29,7 +29,28 @@ impl Default for Person {
 // 5. ２つ目の要素は年齢として`u8`型にしてください。
 // 6. もしも年齢のパースに失敗した場合には、デフォルトの`Person`を返してください。
 impl From<&str> for Person {
-    fn from(s: &str) -> Self {}
+    fn from(s: &str) -> Self {
+        let splited: Vec<&str> = s.split(',').collect();
+        
+        if splited.len() != 2 {
+            return Person::default();
+        };
+
+        let name = splited.first().unwrap().to_string();
+
+        if name.is_empty(){
+            return Person::default();
+        }
+
+        let age = splited.get(1).unwrap().to_string();
+        match age.parse::<u8>(){
+            Ok(age) => Person{
+                name,
+                age
+            },
+            Err(_) => Person::default()
+        }
+    }
 }
 
 fn main() {

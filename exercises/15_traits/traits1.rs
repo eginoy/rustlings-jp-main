@@ -6,6 +6,10 @@ trait AppendBar {
 
 impl AppendBar for String {
     // TODO:`AppendBar`トレイトを`String`型に移植してください。
+    fn append_bar(mut self) -> Self {
+        self += "Bar";
+        self
+    }
 }
 
 fn main() {

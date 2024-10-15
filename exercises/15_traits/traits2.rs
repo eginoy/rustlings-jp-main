@@ -5,6 +5,13 @@ trait AppendBar {
 // TODO: `AppendBar`を文字列の配列型に移植してください。
 // `append_bar`は"Bar"を配列の末尾に追加するメソッドです。
 
+impl AppendBar for Vec<String> {
+   fn append_bar(mut self) -> Self {
+       self.push("Bar".to_string());
+       self
+   } 
+}
+
 fn main() {
     // この行で関数のテストができます。
 }

@@ -27,6 +27,9 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // `map`は`String`のキーや`Progress`型の値を持つ。
     // map = { "variables1": Complete, "from_str": None, … }
+    let progresses:Vec<&Progress> = map.values().collect();
+    progresses.iter().filter(|&&&progress| progress == value).count()
+
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -46,6 +49,8 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // `collection` はスライスのハッシュマップです。
     // collection = [{ "variables1": Complete, "from_str": None, … },
     //               { "variables2": Complete, … }, … ]
+    let progresses: Vec<&Progress> = collection.iter().flat_map(|hash| hash.values()).collect();
+    progresses.iter().filter(|&&&prog| prog == value).count()
 }
 
 fn main() {

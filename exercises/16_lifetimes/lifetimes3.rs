@@ -1,9 +1,9 @@
 // ライフタイムは構造体が参照を持つ際にも必要になります。
 
 // TODO: 構造体に関するコンパイルエラーを修正してください。
-struct Book {
-    author: &str,
-    title: &str,
+struct Book<'a> {
+    author: &'a str,
+    title: &'a str,
 }
 
 fn main() {

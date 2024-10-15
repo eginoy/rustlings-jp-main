@@ -9,18 +9,18 @@
 // TODO: コードがコンパイルできるようにenumの定義の中で`Box`を利用してください。
 #[derive(PartialEq, Debug)]
 enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>),
     Nil,
 }
 
 // TODO: 空のconsリスト(Nil)を作成してください。
 fn create_empty_list() -> List {
-    todo!()
+    List::Nil
 }
 
 // TODO:空ではないconsリスト(どれだけ再帰するかは自身で決めて大丈夫です)を作成してください。例. (42, (35, Nil))など
 fn create_non_empty_list() -> List {
-    todo!()
+    List::Cons(10, Box::new(List::Cons(5, Box::new(List::Nil))))
 }
 
 fn main() {

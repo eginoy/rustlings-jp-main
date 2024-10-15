@@ -22,13 +22,13 @@ fn main() {
     let numbers: Vec<_> = (0..100u32).collect();
 
     // TODO: `Arc`を使って`shared_numbers`を定義してください。
-    // let shared_numbers = ???;
+    let shared_numbers = Arc::new(numbers);
 
     let mut join_handles = Vec::new();
 
     for offset in 0..8 {
         // TODO: `shared_numbers`を使って`child_numbers`を定義してください。
-        // let child_numbers = ???;
+        let child_numbers = Arc::clone(&shared_numbers);
 
         let handle = thread::spawn(move || {
             let sum: u32 = child_numbers.iter().filter(|&&n| n % 8 == offset).sum();

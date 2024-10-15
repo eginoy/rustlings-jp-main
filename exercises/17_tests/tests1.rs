@@ -12,10 +12,12 @@ fn main() {
 mod tests {
     // TODO: `is_even`をインポートしてください。外部にあるモジュールをインポートするためにワイルドカードを使うことができます。
 
+    use crate::*;
+
     #[test]
     fn you_can_assert() {
         // TODO: いくつかの値を入れて、`is_even`の機能を試してみてください。
-        assert!();
-        assert!();
+        assert!(is_even(2));
+        assert!(is_even(4));
     }
 }

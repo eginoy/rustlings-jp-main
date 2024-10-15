@@ -22,6 +22,7 @@ fn main() {
     let mut results = Vec::new();
     for handle in handles {
         // TODO: 全てのスレッドから得られた結果を`results`配列に収集してください。ここでは`thread::spawn`を返り値としてもつ`JoinHandle`構造体を利用してください。
+        results.push(handle.join().unwrap());
     }
 
     if results.len() != 10 {

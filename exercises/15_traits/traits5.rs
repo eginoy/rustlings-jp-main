@@ -19,7 +19,7 @@ impl SomeTrait for OtherStruct {}
 impl OtherTrait for OtherStruct {}
 
 // TODO: この関数の入出力を変更するだけでコンパイルエラーを修正してください。
-fn some_func(item: ???) -> bool {
+fn some_func(item: impl SomeTrait + OtherTrait) -> bool {
     item.some_function() && item.other_function()
 }
 
